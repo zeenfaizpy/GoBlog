@@ -1,4 +1,2 @@
 package: github.com/zeenfaizpy/GoTodo
-import:
-- package: github.com/julienschmidt/httprouter
-  version: v1.1
+import: []

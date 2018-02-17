@@ -2,23 +2,37 @@ package main
 
 import (
 	"fmt"
-	"github.com/julienschmidt/httprouter"
 	"log"
 	"net/http"
 )
 
-func Index(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
-	fmt.Fprint(w, "Welcome!\n")
+type Person struct {
+	name string
 }
 
-func Hello(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
-	fmt.Fprintf(w, "hello, %s!\n", ps.ByName("name"))
+func (p Person) ServeHTTP(w http.ResponseWriter, r *http.Request) {
+	fmt.Fprintf(w, "My name is %s\n", p.name)
+}
+
+func Index(w http.ResponseWriter, r *http.Request) {
+	fmt.Fprintf(w, "Url is %s\n", r.URL.Path)
 }
 
 func main() {
-	router := httprouter.New()
-	router.GET("/", Index)
-	router.GET("/hello/:name", Hello)
+	mux := http.NewServeMux()
 
-	log.Fatal(http.ListenAndServe(":8080", router))
+	personHandler := Person{"faizal"}
+
+	mux.HandleFunc("/", Index)
+	mux.Handle("/about", personHandler)
+
+	files := http.FileServer(http.Dir("/Users/mohammadfaizal/go_workspace/src/github.com/zeenfaizpy/GoTodo"))
+	mux.Handle("/static/", http.StripPrefix("/static", files))
+
+	server := http.Server{
+		Addr:    "0.0.0.0:8000",
+		Handler: mux,
+	}
+
+	log.Fatal(server.ListenAndServe())
 }
