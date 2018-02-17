@@ -26,8 +26,8 @@ func main() {
 	mux.HandleFunc("/", Index)
 	mux.Handle("/about", personHandler)
 
-	files := http.FileServer(http.Dir("/Users/mohammadfaizal/go_workspace/src/github.com/zeenfaizpy/GoTodo"))
-	mux.Handle("/static/", http.StripPrefix("/static", files))
+	// files := http.FileServer(http.Dir("/Users/mohammadfaizal/go_workspace/src/github.com/zeenfaizpy/GoTodo"))
+	// mux.Handle("/static/", http.StripPrefix("/static", files))
 
 	server := http.Server{
 		Addr:    "0.0.0.0:8000",
