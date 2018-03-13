@@ -6,8 +6,8 @@ import (
 
 	"github.com/gorilla/mux"
 
-	"github.com/zeenfaizpy/GoTodo/src/config"
-	"github.com/zeenfaizpy/GoTodo/src/views"
+	"github.com/zeenfaizpy/GoBlog/src/config"
+	"github.com/zeenfaizpy/GoBlog/src/views"
 )
 
 func main() {

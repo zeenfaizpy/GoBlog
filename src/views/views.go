@@ -5,8 +5,8 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/zeenfaizpy/GoTodo/src/config"
-	"github.com/zeenfaizpy/GoTodo/src/models"
+	"github.com/zeenfaizpy/GoBlog/src/config"
+	"github.com/zeenfaizpy/GoBlog/src/models"
 )
 
 // IndexHandler ...
