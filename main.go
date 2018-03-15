@@ -21,6 +21,8 @@ func main() {
 
 	mux := mux.NewRouter()
 	mux.HandleFunc("/", views.IndexHandler(env))
+	mux.HandleFunc("/home", views.HomeHandler(env))
+	mux.HandleFunc("/process", views.ProcessHandler(env))
 
 	server := http.Server{
 		Addr:    "0.0.0.0:8000",

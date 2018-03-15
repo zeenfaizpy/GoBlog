@@ -2,6 +2,7 @@ package views
 
 import (
 	"fmt"
+	"html/template"
 	"log"
 	"net/http"
 
@@ -24,6 +25,27 @@ func IndexHandler(env config.Env) http.HandlerFunc {
 		for _, post := range posts {
 			fmt.Fprintf(w, "%d %s %s \n", post.ID, post.Title, post.Content)
 		}
+
+	}
+}
+
+// HomeHandler ...
+func HomeHandler(env config.Env) http.HandlerFunc {
+	return func(w http.ResponseWriter, r *http.Request) {
+
+		t, _ := template.ParseFiles("src/static/home.html")
+		t.Execute(w, "")
+
+	}
+}
+
+// ProcessHandler ...
+func ProcessHandler(env config.Env) http.HandlerFunc {
+	return func(w http.ResponseWriter, r *http.Request) {
+
+		r.ParseMultipartForm(1024)
+
+		fmt.Fprintln(w, r.MultipartForm)
 
 	}
 }
